@@ -1,6 +1,7 @@
-import React from "react";
-import { Link, Links, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import useCheckAuth from "../hooks/checkAuth";
+import { useContext } from "react";
+import { ThemeContext } from "../themeProvider";
 const LINKS = [
   {
     name: "Home",
@@ -17,9 +18,9 @@ const LINKS = [
 ];
 const Navbar = () => {
   useCheckAuth();
-  const location = useLocation();
-  console.log(location);
 
+  const theme = useContext(ThemeContext);
+  console.log(theme);
   return (
     <div>
       <nav className=" border-gray-200 bg-gray-200">
@@ -44,9 +45,9 @@ const Navbar = () => {
             >
               <path
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M1 1h15M1 7h15M1 13h15"
               />
             </svg>
@@ -54,19 +55,17 @@ const Navbar = () => {
           <div className="hidden w-full md:block md:w-auto" id="navbar-default">
             <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
               {LINKS.map((l) => {
-                const activeLink = l.path == location.pathname;
-                console.log(activeLink);
                 return (
                   <li key={l.path}>
                     <NavLink
                       to={l.path}
                       className={({ isActive }) =>
                         `
-                      block py-2 px-3  bg-blue-700 rounded-sm md:bg-transparent  md:p-0 ${
-                        isActive
-                          ? "text-teal-500"
-                          : "text-black  dark:text-white"
-                      }`
+                        block py-2 px-3  bg-blue-700 rounded-sm md:bg-transparent  md:p-0 ${
+                          isActive
+                            ? "text-teal-500"
+                            : "text-black  dark:text-white"
+                        }`
                       }
                       aria-current="page"
                     >
@@ -75,7 +74,6 @@ const Navbar = () => {
                   </li>
                 );
               })}
-
               <ChekLoggedInUser />
             </ul>
           </div>

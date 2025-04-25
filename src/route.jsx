@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import HomePage from "./pages/homePage";
 import Register from "./components/Register";
 import Profile from "./components/Profile";
+import ThemeProvider from "./themeProvider";
 
 const router = createBrowserRouter([
   // {
@@ -17,11 +18,12 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <div>
+      <ThemeProvider>
+        <div>hello</div>
         <Navbar />
         <Outlet />
         <Footer />
-      </div>
+      </ThemeProvider>
     ),
     children: [
       {
