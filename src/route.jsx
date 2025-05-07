@@ -1,13 +1,12 @@
 import { createBrowserRouter, Outlet } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Product from "./components/product/Product";
-import Login from "./components/Login";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
-import HomePage from "./pages/homePage";
-import Register from "./components/Register";
+import Login from "./components/Login";
+import Navbar from "./components/Navbar";
 import Profile from "./components/Profile";
-import ThemeProvider from "./themeProvider";
+import Register from "./components/Register";
+import Category from "./category/category";
+import Product from "./product/Product";
 
 const router = createBrowserRouter([
   // {
@@ -18,12 +17,11 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <ThemeProvider>
-        <div>hello</div>
+      <div>
         <Navbar />
         <Outlet />
         <Footer />
-      </ThemeProvider>
+      </div>
     ),
     children: [
       {
@@ -35,15 +33,17 @@ const router = createBrowserRouter([
         path: "/about",
         element: <di>about page</di>,
       },
-      {
-        path: "/home",
-        Component: Product,
-      },
+
       { path: "/profile", element: <Profile /> },
       {
         path: "*",
         element: <div>not found</div>,
       },
+      {
+        path: "category",
+        element: <Category />,
+      },
+      { path: "/product", element: <Product /> },
     ],
   },
   {

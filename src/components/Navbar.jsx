@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import useCheckAuth from "../hooks/checkAuth";
 import { useContext } from "react";
-import { ThemeContext } from "../themeProvider";
+import { ThemeContext } from "../providers/ThemeProvider";
 const LINKS = [
   {
     name: "Home",
