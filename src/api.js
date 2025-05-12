@@ -7,3 +7,11 @@ const api = axios.create({
 });
 
 export default api;
+
+export const getData = async (url, err) => {
+  const res = await api.get(url);
+  if (res.status == 200 || res.status == 201) {
+    return res;
+  }
+  throw new Error(err || "unable to get data");
+};

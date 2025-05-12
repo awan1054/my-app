@@ -1,7 +1,7 @@
-import React, { Suspense, use, useEffect, useState } from "react";
-import api from "../api";
+import React, { Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import { Link } from "react-router-dom";
-import { ErrorBoundary, ErrorBoundaryContext } from "react-error-boundary";
+import api, { getData } from "../api";
 import useQuery from "../hooks/useQuery";
 
 const Category = () => {
@@ -25,13 +25,6 @@ const Category = () => {
   );
 };
 
-const getData = async (url) => {
-  const res = await api.get(url);
-  if (res.status == 200) {
-    return res;
-  }
-  throw new Error("unable to get categorys");
-};
 const url = "/category";
 export function CategoriesComp() {
   const category = useQuery({
@@ -46,14 +39,22 @@ export function CategoriesComp() {
           key={e._id}
           className="bg-white shadow-md rounded-lg overflow-hidden"
         >
-          <Link to={`/category/${e._id}`} className="block">
+          <Link viewTransition to={`/category/${e._id}`} className="block">
             <img
               src={`http://localhost:5000/${e.catgImg}`}
               alt="Category 1"
               className="w-full h-48 object-cover"
             />
             <div className="p-4">
-              <h3 className="text-lg font-bold mb-2"> {e.name}</h3>
+              <h3
+                className="text-lg font-bold mb-2"
+                style={{
+                  viewTransitionName: `catg-name-${e.name}`,
+                }}
+              >
+                {" "}
+                {e.name}
+              </h3>
               <p className="text-gray-600">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               </p>

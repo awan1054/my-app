@@ -7,7 +7,13 @@ import Profile from "./components/Profile";
 import Register from "./components/Register";
 import Category from "./category/category";
 import Product from "./product/Product";
+import ProductOfCategoryPage from "./components/ProductOfCategoryPage";
+import SingleProductPage from "./product/singleProductPage";
 
+const singleProduct = {
+  path: ":productId",
+  element: <SingleProductPage />,
+};
 const router = createBrowserRouter([
   // {
   //   path: "/",
@@ -48,11 +54,20 @@ const router = createBrowserRouter([
           },
           {
             path: ":catgId",
-            element: <ProductOfCategoryPage />,
+            children: [
+              {
+                index: true,
+                element: <ProductOfCategoryPage />,
+              },
+              singleProduct,
+            ],
           },
         ],
       },
-      { path: "/product", element: <Product /> },
+      {
+        path: "/product",
+        children: [{ index: true, element: <Product /> }, singleProduct],
+      },
     ],
   },
   {
